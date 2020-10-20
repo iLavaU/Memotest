@@ -25,6 +25,7 @@
     width: 100%;
     backface-visibility: hidden;
     border-radius: 5px;
+    transition: transform 1s, opacity 1s;
     
 }
 
@@ -32,11 +33,13 @@
     background: rgb(0, 162, 255);
     outline: 2px solid black;
     outline-offset: -4px;
+    
   }
   
   .carta__cara--back {
     background: rgba(0, 0, 255, 0.397);
     transform: rotateY( 180deg );
+    
   }
 
   .carta.is-flipped {
