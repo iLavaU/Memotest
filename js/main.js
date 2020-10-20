@@ -33,6 +33,7 @@ $(document).ready(function() {
         var clases = [];
         var cartas = [];
         $('.carta').click(function () {
+            
             if (cantidad<2) {
                 cartas[cantidad] = $(this).attr("id");
                 clases[cantidad] = $(this).find(".imgBack").attr('class');
@@ -40,9 +41,10 @@ $(document).ready(function() {
                 cantidad+=1;
             }else if (cantidad==2){
                 if (check(clases)){
-                    
-                    $("#"+cartas[0]).css('visibility','hidden');
-                    $("#"+cartas[1]).css('visibility','hidden');
+                    //$("#"+cartas[0]).fadeOut("slow")
+                    //$("#"+cartas[1]).fadeOut("slow")
+                    $("#"+cartas[0]).css('opacity','0');
+                    $("#"+cartas[1]).css('opacity','0');
                     cantidad=0;
                 } else {
                     $('.carta').removeClass("is-flipped")
