@@ -32,15 +32,17 @@ $(document).ready(function() {
     function flip() {
         var clases = [];
         var cartas = [];
+        var cartaId = [];
         $('.carta').click(function () {
             
             if (cantidad<2) {
                 cartas[cantidad] = $(this).attr("id");
                 clases[cantidad] = $(this).find(".imgBack").attr('class');
-                $(this).toggleClass("is-flipped")
+                cartaId[cantidad] = $(this).attr('id');
+                $(this).toggleClass("is-flipped");
                 cantidad+=1;
             }else if (cantidad==2){
-                if (check(clases)){
+                if (check(clases,cartaId)){
                     //$("#"+cartas[0]).fadeOut("slow")
                     //$("#"+cartas[1]).fadeOut("slow")
                     $("#"+cartas[0]).css('opacity','0');
@@ -57,8 +59,8 @@ $(document).ready(function() {
         })
     }
     
-    function check(val) {
-        if (val[0]==val[1]) {
+    function check(val1,val2) {
+        if ((val1[0]==val1[1]) && (val2[0] != val2[1])) {
             return true
         }else {
             return false
