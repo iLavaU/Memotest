@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var cantidad=0;
+
 
     loadcartas(20,flip);
 
@@ -25,15 +27,21 @@ $(document).ready(function() {
             $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen">')    
         }
        cb()
-         
-        
-
     }
 
     function flip() {
         $('.carta').click(function () {
-            $('.carta').removeClass("is-flipped")
-            $(this).toggleClass("is-flipped")
+            if (cantidad<2) {
+                $(this).toggleClass("is-flipped")
+                cantidad+=1;
+            } else {
+                $('.carta').removeClass("is-flipped")
+                cantidad=0;
+            }
+            
+            
+
+            
         })
     }
     
