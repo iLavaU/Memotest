@@ -22,7 +22,7 @@ $(document).ready(function() {
             var nroImg = numImg[i-1]-10*Math.floor(numImg[i-1]/10.1);
             
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
-            $("#carta"+i).append('<div class="carta__cara carta__cara--front"</div>')
+            $("#carta"+i).append('<div class="carta__cara carta__cara--front"> <img src="/img/front.svg" alt="" class="imagen"> </div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
             $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen img'+nroImg+'">')    
         }
