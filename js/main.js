@@ -1,12 +1,11 @@
 $(document).ready(function() {
 
     let cantidad=0;
-
-
+    let windowwidth= $(window).width();
+    if (windowwidth<600) {
+        $(".container").css("grid-template-columns","auto auto auto auto")
+    }
     loadcartas(20,flip);
-
-
-
 
 
     //Funciones!
