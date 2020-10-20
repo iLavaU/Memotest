@@ -25,11 +25,13 @@
     width: 100%;
     backface-visibility: hidden;
     border-radius: 5px;
+    
 }
 
 .carta__cara--front {
     background: rgb(0, 162, 255);
-    
+    outline: 2px solid black;
+    outline-offset: -4px;
   }
   
   .carta__cara--back {
