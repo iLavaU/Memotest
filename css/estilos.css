@@ -28,12 +28,12 @@
 }
 
 .carta__cara--front {
-    background: red;
+    background: rgb(0, 162, 255);
     
   }
   
   .carta__cara--back {
-    background: blue;
+    background: rgba(0, 0, 255, 0.397);
     transform: rotateY( 180deg );
   }
 

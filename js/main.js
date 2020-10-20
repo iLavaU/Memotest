@@ -24,7 +24,7 @@ $(document).ready(function() {
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--front"</div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
-            $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen">')    
+            $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen img'+nroImg+'">')    
         }
        cb()
     }
@@ -34,6 +34,9 @@ $(document).ready(function() {
             if (cantidad<2) {
                 $(this).toggleClass("is-flipped")
                 cantidad+=1;
+                if (condition) {
+                    
+                }
             } else {
                 $('.carta').removeClass("is-flipped")
                 cantidad=0;
