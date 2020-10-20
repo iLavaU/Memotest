@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var cantidad=0;
+    let cantidad=0;
 
 
     loadcartas(20,flip);
@@ -24,30 +24,45 @@ $(document).ready(function() {
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--front"> <img src="/img/front.svg" alt="" class="imagen"> </div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
-            $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen img'+nroImg+'">')    
+            $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen imgBack img'+nroImg+'">')    
         }
        cb()
     }
 
     function flip() {
+        var clases = [];
+        var cartas = [];
         $('.carta').click(function () {
             if (cantidad<2) {
+                cartas[cantidad] = $(this).attr("id");
+                clases[cantidad] = $(this).find(".imgBack").attr('class');
                 $(this).toggleClass("is-flipped")
                 cantidad+=1;
-                if (condition) {
+            }else if (cantidad==2){
+                if (check(clases)){
                     
+                    $("#"+cartas[0]).css('visibility','hidden');
+                    $("#"+cartas[1]).css('visibility','hidden');
+                    cantidad=0;
+                } else {
+                    $('.carta').removeClass("is-flipped")
+                    cantidad=0;
                 }
-            } else {
+            }else {
                 $('.carta').removeClass("is-flipped")
                 cantidad=0;
-            }
-            
-            
-
-            
+            } 
         })
     }
     
+    function check(val) {
+        if (val[0]==val[1]) {
+            return true
+        }else {
+            return false
+        }
+
+    }
     
 
 })
