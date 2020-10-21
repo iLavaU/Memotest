@@ -53,6 +53,8 @@ $(document).ready(function() {
                 $(this).toggleClass("is-flipped");
                 if (check(clases,cartaId)){
                     clearTimeout(delayedFlip);
+                    $("#"+cartaId[0]).off();
+                    $("#"+cartaId[1]).off();
                     $("#"+cartaBack[0]).css('opacity','0');
                     $("#"+cartaBack[1]).css('opacity','0');
                     $("#"+cartaFront[0]).css('opacity','0');
