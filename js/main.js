@@ -34,6 +34,7 @@ $(document).ready(function() {
             //Cada carta tiene dos divs, uno para el frente y otro para el dorso. Además les agrego las imágenes con su nro.
             //Esto explica muy bien el css de las cartas: https://3dtransforms.desandro.com/card-flip.
 
+            //Append de JQuery: https://api.jquery.com/append/.
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--front" id="cartaFront'+i+'"> <img src="/img/front.svg" alt="" class="imagen"> </div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
@@ -61,14 +62,14 @@ $(document).ready(function() {
 
                 /* Hago varias cosas:
                             1) Borro el timeout que me iba a dar vuelta las cartas. 
-                            2) Doy vuelta todas las cartas removiendo la clase is-flipped.
+                            2) Oculto todas las cartas removiendo la clase is-flipped.
                             3) Guardo los datos de la carta que clickee.
-                            4) Doy vuelta esa carta.*/
+                            4) Muestro esa carta.*/
 
                 //Borro el timeout.
                 clearTimeout(delayedFlip);
 
-                //Doy vuelta todas las cartas.
+                //Oculto todas las cartas.
                 $('.carta').removeClass("is-flipped")
 
                 //Datos
@@ -76,11 +77,11 @@ $(document).ready(function() {
                 nroCarta[cantidad-1] = parseInt(carta.slice(5));
                 clases[cantidad-1] = $(this).find(".imgBack").attr('class');
 
-                //Doy vuelta la carta que clickee.
+                //Muestro la carta que clickee.
                 $(this).toggleClass("is-flipped");
             }else if (cantidad==2){
 
-                /* También guardo datos y doy vuelta la carta que clickee.*/
+                /* También guardo datos y muestro la carta que clickee.*/
 
                 carta = $(this).attr('id');
                 nroCarta[cantidad-1] = parseInt(carta.slice(5));
