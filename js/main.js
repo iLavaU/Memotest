@@ -14,15 +14,23 @@ $(document).ready(function() {
 
 
     function loadcartas(n,cb) {
+        //Creo el array!
         var numImg = Array.from({length: n}, (_, i) => i + 1)
+        //Lo desordeno!
         numImg.sort(function() { return 0.5 - Math.random() });
 
+
+        //Cargo las cartas :)
         for (let i = 1; i < n+1; i++) {
             var nroImg = numImg[i-1]-10*Math.floor(numImg[i-1]/10.1);
             
+            //Todas las cartas están dentro del container y cada una contiene dos divs, uno para el frente 
+            //y otro para el dorso.
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
             $("#carta"+i).append('<div class="carta__cara carta__cara--front" id="cartaFront'+i+'"> <img src="/img/front.svg" alt="" class="imagen"> </div>')
-            $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
+            
+            
+            $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"></div>')
             $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen imgBack img'+nroImg+'">')    
         }
        cb()
@@ -34,7 +42,6 @@ $(document).ready(function() {
         let cartaFront = [];
         let cartaId = [];
         let delayedFlip;
-        let delayedFade;
         $('.carta').click(function () {
             cantidad+=1;
             if (cantidad<2) {
