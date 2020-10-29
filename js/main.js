@@ -17,30 +17,32 @@ $(document).ready(function() {
     //Funciones :)
 
     function loadcartas(n,cb) {
-
+        let nroImg;
         //Creo el Array. Va de 1 a n con longitud n (chequear https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/from)
-        var numImg = Array.from({length: n}, (_, i) => i + 1)
+        let numImg = Array.from({length: n}, (_, i) => i + 1)
+        console.log(`Antes: ${numImg}`)
 
         //Lo desordeno! (chequear https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/sort)
         numImg.sort(function() { return 0.5 - Math.random() });
-
+        console.log(`Después: ${numImg}`)
 
         //Cargo las cartas.
         for (let i = 1; i < n+1; i++) {
 
             //No hay 20 imagenes, entonces tengo que tener cuidado con el nro. que le asigno a cada una.
-            var nroImg = numImg[i-1]-10*Math.floor(numImg[i-1]/10.1);
+            nroImg = numImg[i-1]-10*Math.floor(numImg[i-1]/10.1);
             
+            console.log(`Nro. original:${numImg[i - 1]} y nro recalculado: ${nroImg}`)
             //Cada carta tiene dos divs, uno para el frente y otro para el dorso. Además les agrego las imágenes con su nro.
             //Esto explica muy bien el css de las cartas: https://3dtransforms.desandro.com/card-flip.
 
             //Append de JQuery: https://api.jquery.com/append/.
             $("#container").append('<div class="carta" id="carta'+i+'"</div>')
-            $("#carta"+i).append('<div class="carta__cara carta__cara--front" id="cartaFront'+i+'"> <img src="/img/front.svg" alt="" class="imagen"> </div>')
-            $("#carta"+i).append('<div class="carta__cara carta__cara--back" id="cartaBack'+i+'"</div>')
-            $("#cartaBack"+i).append('<img src="/img/img'+nroImg+'.svg" alt="" class="imagen imgBack img'+nroImg+'">')    
+            $(`#carta${i}`).append(`<div class="carta__cara carta__cara--front" id="cartaFront${i}"> <img src="/img/front.svg" alt="" class="imagen"> </div>`)
+            $(`#carta${i}`).append(`<div class="carta__cara carta__cara--back" id="cartaBack${i}"><img src="/img/img${nroImg}.svg" alt="" class="imagen imgBack img${nroImg}"></div>`)
+                
         }
-        //Le agregué un callback para que el listener se cree recién después de que están cargadas las cartas.
+        //Le agregué un callback para que el listener se cree después de cargar las cartas.
        cb()
     }
 
@@ -79,6 +81,8 @@ $(document).ready(function() {
 
                 //Muestro la carta que clickee.
                 $(this).toggleClass("is-flipped");
+                console.log(nroCarta)
+                console.log(clases)
             }else if (cantidad==2){
 
                 /* También guardo datos y muestro la carta que clickee.*/
@@ -87,7 +91,8 @@ $(document).ready(function() {
                 nroCarta[cantidad-1] = parseInt(carta.slice(5));
                 clases[cantidad-1] = $(this).find(".imgBack").attr('class');
                 $(this).toggleClass("is-flipped");
-
+                console.log(nroCarta)
+                console.log(clases)
                 if (check(clases,nroCarta)){
                     /*Si check me da verdadero es porque las clases de las imagenes son las mismas (coinciden las imagenes) y el id de la carta es distinto (no se clickeo la misma carta dos veces) entonces encontre una coincidencia y entro al if:*/
                     /*Hago lo siguiente: 
@@ -99,13 +104,13 @@ $(document).ready(function() {
                     //Borro el timeout.
                     clearTimeout(delayedFlip);
 
-                    //Altero el css de frente y dorso y apago el listener.
-                    $("#carta"+nroCarta[0]).off()
-                    $("#carta"+nroCarta[1]).off()
-                    $("#cartaBack"+nroCarta[0]).css('opacity','0');
-                    $("#cartaBack"+nroCarta[1]).css('opacity','0');
-                    $("#cartaFront"+nroCarta[0]).css('opacity','0');
-                    $("#cartaFront"+nroCarta[1]).css('opacity','0');
+                    //Altero el css de frente y dorso de ambas cartas y apago el listener.
+                    $(`#carta${nroCarta[0]}`).off()
+                    $(`#carta${nroCarta[1]}`).off()
+                    $(`#cartaBack${nroCarta[0]}`).css('opacity','0');
+                    $(`#cartaBack${nroCarta[1]}`).css('opacity','0');
+                    $(`#cartaFront${nroCarta[0]}`).css('opacity','0');
+                    $(`#cartaFront${nroCarta[1]}`).css('opacity','0');
 
                     //Reseteo cantidad.
                     cantidad=0;
@@ -118,6 +123,7 @@ $(document).ready(function() {
                     delayedFlip = setTimeout(function(){
                         $('.carta').removeClass("is-flipped")
                     },1500)
+                    
                     cantidad=0; 
                 }
             }
